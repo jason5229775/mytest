@@ -1,0 +1,55 @@
+{php
+	$catid = $_GET['catid'];
+	$thumb = dr_get_file(dr_cat_value($catid, thumb));
+	$yanse = dr_cat_value($catid, yanse);
+	$mycenter = dr_cat_value($catid, mycenter);
+	$myzoom = dr_cat_value($catid, myzoom);
+	$color = $catid == 4 ? '#fff' : '#000';
+}
+<script type="text/javascript">
+
+	var icon;
+	var show_modal;
+	//var iconUrl = "{$thumb}";
+	var iconUrl = "/uploadfile/201906/795edd624a.png";
+  markers[{$catid}] = [];
+	//markerParam[{$catid}] = {};
+	//markerParam[{$catid}].center = {if $mycenter != ''}new T.LngLat({$mycenter}){else}''{/if};
+	//markerParam[{$catid}].zoom = {$myzoom};
+	//icon = new T.Icon({iconUrl : iconUrl, iconSize : new T.Point(50, 52)});// 坐标图标配置
+	icon = new EzIcon({src : iconUrl, iconSize : new Array(50, 52)});
+    {list action=module catid=$catid field=id,catid,title,jingweidu more=1}
+	markers[{$catid}][{$key}]={};	//创建标注对象
+	var title = new EzTitle("<div class='markerPoint maerkerid{$t.id} point animated bounceInDown' data-id='{$t.id}' style='color:#000; background:#0ff8d8'>{$t.title}</div>", {offset:new Array(-60,-42)});
+	//var title = new EzTitle("123",{offset:new Array(-60,-42)});
+	var jwd2 = "{$t.jingweidu}".split(",");
+	var jwd = new EzCoord(jwd2[0],jwd2[1]);
+	//console.log(jwd);
+	if(iconUrl != '') {
+		//document.write("<div id=\"img1\"");
+		//var child = {$key}+1;
+
+		//markers[{$catid}][{$key}]["marker"] = new T.Marker(new T.LngLat({$t.jingweidu}), {icon:icon});
+		//console.log("{$t.jingweidu}");
+		markers[{$catid}][{$key}]["marker"] = new EzMarker(jwd, icon, title)
+
+		//document.write("<\/div>");
+	} else {
+		//markers[{$catid}][{$key}]["marker"] = new T.Marker(new T.LngLat({$t.jingweidu}));
+		
+		markers[{$catid}][{$key}]["marker"] = new EzMarker(jwd, '', title)
+	}
+	/*markers[{$catid}][{$key}]["label"] = new T.Label({	//添加文字标注
+		//text : "<div class='markerPoint maerkerid{$t.id} point animated bounceInDown' data-id='{$t.id}' style='color:{$color}; background:{$yanse}'>{$t.title}</div>",
+		text : "<div class='markerPoint maerkerid{$t.id} point animated bounceInDown' data-id='{$t.id}' style='color:#000; background:#0ff8d8'>{$t.title}</div>",
+		position : markers[{$catid}][{$key}]["marker"].getLngLat(),
+		offset : new T.Point(-60, -42)
+	});*/
+
+			//$("#divName img").eq(0).attr("src");
+	//markers[{$catid}][{$key}]["label"].setBackgroundColor('{$yanse}');
+	//markers[{$catid}][{$key}]["label"].setBorderColor('{$yanse}');
+	markers[{$catid}][{$key}]["marker"].addEventListener("click", function() {click_point({$t.id});});
+	//markers[{$catid}][{$key}]["label"].addEventListener("click", function() {click_point({$t.id});});
+{/list}		
+</script>

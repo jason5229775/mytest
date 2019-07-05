@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width" name="viewport" />
+		<title>{$meta_title}</title>
+		<link rel="stylesheet" type="text/css" href="{HOME_THEME_PATH}css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{HOME_THEME_PATH}css/comm.css?{time()}" />
+		<link rel="stylesheet" type="text/css" href="{HOME_THEME_PATH}css/animate.css" />
+        <link rel="stylesheet" type="text/css" href="{HOME_THEME_PATH}css/EzServerClient.min.css" />
+		<script type="text/javascript" src="{HOME_THEME_PATH}js/init.js"></script>
+		<script type="text/javascript" src="{HOME_THEME_PATH}js/jquery-2.0.1.js"></script>
+		<script type="text/javascript" src="{HOME_THEME_PATH}js/bootstrap.min.js"></script>
+        <!--离线地图引入山海易绘内网JS-->
+		<!--<script type="text/javascript" src="http://api.tianditu.gov.cn/api?v=4.0&amp;tk=38939d787d7c0e6478e4ae0013f2213d"></script>-->
+        <script type="text/javascript" src="{HOME_THEME_PATH}js/EzMapApi.js"></script>
+        <script type="text/javascript" src="{HOME_THEME_PATH}js/EzServerClient.min.js"></script>
+		<script type="text/javascript" src="{HOME_THEME_PATH}js/comm.js"></script>
+	</head>
+	<body>
+		<div id="map-page"><div id="map"></div></div>
+		<!--标题-->
+		<div id="page-title-wrap">
+			<img class="bg" src="{HOME_THEME_PATH}images/top-bg.png" /><div class="page-title">{$meta_title}</div>
+		</div>
+		<!--栏目列表-->
+		<div id="category">
+			<ul class="list">
+				{category module=share pid=0}
+				<li class="{if IS_SHARE && $catid && in_array($catid, $t.catids)}active{/if}" data-id="{$t.id}" data-title="{$t.name}" onclick="javascript:toggle({$t.id}, this)">{$t.name}</li>
+				{/category}
+			</ul>
+		</div>
+		<!--右侧列表框-->
+		<div class="point-list">
+			<div class="title">药材分布列表</div>
+			<ul>
+				<li>基地</li><li>基地</li>
+			</ul>
+		</div>
+		<!--左侧基地-->
+		<div id="jidi-wrap" class="hide">
+			<div class="shifan">示范基地</div><div class="shiyan">试验基地</div>
+		</div>
+		<!--坐标点信息弹窗-->
+		<div class="modal" id="modal-marker" tabindex="-1" role="dialog" data-backdrop="false">
+			<img class="bg" src="{HOME_THEME_PATH}images/modal-marker.png" />
+			<button type="button" class="close" id="rebg" aria-label="Close"></button>
+			<div class="content-wrap" id="modal-content">
+				<div class="title">药材基地</div>
+				<div class="detail">
+					<div class="row">
+						<div class="col-xs-6"><img src="" /></div>
+						<div class="col-xs-6 text"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var THEME_PATH = '{HOME_THEME_PATH}';
+			var SITE_URL = '{SITE_URL}';
+			var SITE_AUTH = '{md5(SYS_KEY)}';
+		</script>
+	</body>
+</html>
