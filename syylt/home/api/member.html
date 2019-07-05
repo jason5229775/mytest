@@ -1,0 +1,11 @@
+{if $member}
+你好，<a href="{MEMBER_URL}" class="myusername">{$member.username}</a>
+<span>|</span>
+<a href="javascript:;" onclick="dr_loginout('退出成功')">退出账号</a>
+<span>|</span>
+{else}
+你好，<a href="{dr_member_url('login/index')}">请登录</a>
+<span>|</span>
+<a href="{dr_member_url('register/index')}"> 免费注册</a>
+<span>|</span>
+{/if}

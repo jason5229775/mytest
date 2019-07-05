@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0, user-scalable=no, width=device-width" name="viewport" />
+		<title>{$meta_title}</title>
+		<link rel="stylesheet" type="text/css" href="{HOME_THEME_PATH}css/bootstrap.min.css" />
+		<link rel="stylesheet" type="text/css" href="{HOME_THEME_PATH}css/comm.css?{time()}" />
+		<script type="text/javascript" src="{HOME_THEME_PATH}js/init.js"></script>
+		<script type="text/javascript" src="{HOME_THEME_PATH}js/jquery-2.0.1.js"></script>
+		<script type="text/javascript" src="{HOME_THEME_PATH}js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="http://api.tianditu.gov.cn/api?v=4.0&amp;tk=38939d787d7c0e6478e4ae0013f2213d"></script>
+		<script type="text/javascript" src="{HOME_THEME_PATH}js/comm.js"></script>
+	</head>
+	<body>
+		<div id="map-page"><div id="map"></div></div>
+		<!--标题-->
+		<div id="page-title-wrap">
+			<img class="bg" src="{HOME_THEME_PATH}images/top-bg.png" /><div class="page-title">{$meta_title}</div>
+		</div>
+		<!--栏目列表-->
+		<div id="category">
+			<ul class="list">
+				{category module=share pid=0}
+				<li class="{if IS_SHARE && $catid && in_array($catid, $t.catids)}active{/if}" data-id="{$t.id}" onclick="javascript:toggle({$t.id}, this)">{$t.name}</li>
+				{/category}
+			</ul>
+		</div>
+		<!--栏目列表-->
+		<div id="category">
+			<ul class="list">
+				<li class="active">药材分布</li>
+				<li>药材分布</li>
+				<li>药材分布</li>
+			</ul>
+		</div>
+		<!--左侧基地-->
+		<div id="jidi-wrap" class="hide">
+			<div class="shifan">示范基地</div><div class="shiyan">试验基地</div>
+		</div>
+		<!--坐标点信息弹窗-->
+		<div class="modal" id="modal-marker" tabindex="-1" role="dialog" data-backdrop="false">
+			<img class="bg" src="{HOME_THEME_PATH}images/modal-marker.png" />
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+			<div class="content-wrap" id="modal-content">
+				<div class="title">药材基地</div>
+				<div class="detail">
+					<div class="row">
+						<div class="col-xs-6"><img src="" /></div>
+						<div class="col-xs-6 text">
+							至今，这座绿翳翳的大山，仍有大片的天然野生药材，生长有灵芝、黄精、杜仲、细辛等10多种名贵药材和111科450余种药材，属省级生态自然保护区、全省15座名山之一。2017年，全乡中药材种植面积达到31010亩，中药材种植品种达到44个，以钩藤、黄精、白芨、厚朴、丹参、金丝黄菊等为主，千亩以上中药材基地达到5个，中药材种植专业村达到3个。特别是野生中药材钩藤、黄精分布极广，有望申报成为全国道地中药材品种。
+							专业化、规模化、标准化、企业化的生产基地，集原料收购、成品生产、销售于一体的专业企业，形成闭合的产业链是其项目的一项重要竞争力。”何芳表示，她计划壮大具有较强区域带动性的特色支柱产业，对资源进行优化组合，调整农业产业结构，促进农民脱贫致富，使项目区域内的农民直接参与到项目建设中，并从项目建设的劳务投入和草果、重楼销售中获得实实在在的经济利益。
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var THEME_PATH = '{HOME_THEME_PATH}';
+			var SITE_URL = '{SITE_URL}';
+		</script>
+	</body>
+</html>

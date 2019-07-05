@@ -1,0 +1,37 @@
+{php
+	$catid = $_GET['catid'];
+	$thumb = dr_get_file(dr_cat_value($catid, thumb));
+	$yanse = dr_cat_value($catid, yanse);
+	$mycenter = dr_cat_value($catid, mycenter);
+	$myzoom = dr_cat_value($catid, myzoom);
+	$color = $catid == 4 ? '#fff' : '#000';
+}
+<script type="text/javascript">
+	var icon;
+	var show_modal;
+	var iconUrl = "{$thumb}";
+  markers[{$catid}] = [];
+	//markerParam[{$catid}] = {};
+	//markerParam[{$catid}].center = {if $mycenter != ''}new T.LngLat({$mycenter}){else}''{/if};
+	//markerParam[{$catid}].zoom = {$myzoom};
+	icon = new T.Icon({iconUrl : iconUrl, iconSize : new T.Point(50, 52)});// 坐标图标配置
+
+{list action=module catid=$catid field=id,catid,title,jingweidu more=1}
+	markers[{$catid}][{$key}]={};	//创建标注对象
+	if(iconUrl != '') {
+		markers[{$catid}][{$key}]["marker"] = new T.Marker(new T.LngLat({$t.jingweidu}), {icon:icon});
+	} else {
+		markers[{$catid}][{$key}]["marker"] = new T.Marker(new T.LngLat({$t.jingweidu}));
+	}
+	markers[{$catid}][{$key}]["label"] = new T.Label({	//添加文字标注
+		text : "<div class='point' data-id='{$t.id}' style='color:{$color}'>{$t.title}</div>",
+		position : markers[{$catid}][{$key}]["marker"].getLngLat(),
+		offset : new T.Point(-50, -42)
+	});
+	markers[{$catid}][{$key}]["label"].setBackgroundColor('{$yanse}');
+	markers[{$catid}][{$key}]["label"].setBorderColor('{$yanse}');
+	markers[{$catid}][{$key}]["marker"].addEventListener("click", function() {click_point({$t.id});});
+	markers[{$catid}][{$key}]["label"].addEventListener("click", function() {click_point({$t.id});});
+{/list}
+
+</script>
